@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\User;
+use App\Http\Requests\Admin\UserRequest;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -21,38 +22,29 @@ class UserController extends Controller
         return view('admin.users.users', compact('users'));
     }
 
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::findOrFail($id);
         return view('admin.users.show', compact('user'));
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
         return view('admin.users.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-       $validate = $request->validate([
-            'email' => 'required|email|unique:users,email,' . $id,
-            'name' => 'required|string|max:255',
-            'phone' => 'nullable|string|max:20',
-            'country' => 'nullable|string|max:255',
-        ]);
+       $validate = $request->validated();
 
-        $user = User::findOrFail($id);
         $user->update($validate);
 
         return redirect()->back()->with('success', 'User updated successfully');
     }
 
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id)->delete();
-        return redirect()->route('admin.user')->with('success', 'User deleted successfully');
-    }
+        $user->delete();
+        return redirect()->route('admin.users.index')->with('success', 'تم حذف المستخدم بنجاح');    }
 
 }

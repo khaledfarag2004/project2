@@ -6,7 +6,7 @@
         <!-- HEADER -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="fw-bold">لوحة التحكم</h3>
-            <a href="{{ route('course.create') }}" class="btn btn-primary btn-sm">إضافة كورس</a>
+            <a href="{{ route('admin.courses.create') }}" class="btn btn-primary btn-sm">➕ إضافة كورس</a>
         </div>
 
         <!-- STAT CARDS -->
@@ -69,7 +69,7 @@
                             <td>{{ $course->title }}</td>
                             <td>{{ $course->name_instractor }}</td>
                             <td>{{ $course->price }}</td>
-                            <form action="{{ route('course.delete', $course->id) }}" method="POST">
+                            <form action="{{ route('admin.courses.delete', $course) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <td><button class="btn btn-primary btn-sm">حذف</button></td></form>

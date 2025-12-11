@@ -34,7 +34,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>إدارة الكورسات</h3>
 
-        <a href="{{ route('course.create') }}" class="btn btn-primary">➕ إضافة كورس</a>
+        <a href="{{ route('admin.courses.create') }}" class="btn btn-primary">➕ إضافة كورس</a>
     </div>
 
     <!-- Search -->
@@ -72,7 +72,7 @@
                                 تعديل
                             </button>
 
-                            <form method="POST" action="{{ route('course.delete', $course->id) }}">
+                            <form method="POST" action="{{ route('admin.courses.delete', $course) }}">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm">حذف</button>

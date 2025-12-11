@@ -36,7 +36,7 @@
 
         <div class="card-body">
 
-            <form action=" {{ route('course.store') }} " method="POST">
+            <form action=" {{ route('admin.courses.store') }} " method="POST">
                 @csrf
                 <!-- Course Title -->
                 <div class="mb-3">

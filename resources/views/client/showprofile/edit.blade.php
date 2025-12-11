@@ -6,7 +6,21 @@
             <div class="card-header bg-primary text-white">
                 <h4 class="mb-0">تعديل الحساب</h4>
             </div>
+
             <div class="card-body">
+
+                {{-- ✅ عرض الأخطاء --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger p-2">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                {{-- ✅ الفورم الأساسي --}}
                 <form action="{{ route('profile.update') }}" method="POST">
                     @csrf
                     @method('PUT')
@@ -32,21 +46,20 @@
                     <div class="mb-3">
                         <label class="form-label">الدولة</label>
                         <select name="country" class="form-select" required>
-                            <option value="EG" {{ $user->country == 'EG' ? 'selected' : '' }}>مصر</option>
-                            <option value="SA" {{ $user->country == 'SA' ? 'selected' : '' }}>السعودية</option>
-                            <option value="AE" {{ $user->country == 'AE' ? 'selected' : '' }}>الإمارات</option>
-                            <option value="KW" {{ $user->country == 'KW' ? 'selected' : '' }}>الكويت</option>
-                            <option value="QA" {{ $user->country == 'QA' ? 'selected' : '' }}>قطر</option>
-                            <option value="BH" {{ $user->country == 'BH' ? 'selected' : '' }}>البحرين</option>
-                            <option value="OM" {{ $user->country == 'OM' ? 'selected' : '' }}>عُمان</option>
-                            <option value="JO" {{ $user->country == 'JO' ? 'selected' : '' }}>الأردن</option>
-                            <option value="LB" {{ $user->country == 'LB' ? 'selected' : '' }}>لبنان</option>
-                            <option value="MA" {{ $user->country == 'MA' ? 'selected' : '' }}>المغرب</option>
-                            <option value="DZ" {{ $user->country == 'DZ' ? 'selected' : '' }}>الجزائر</option>
-                            <option value="TN" {{ $user->country == 'TN' ? 'selected' : '' }}>تونس</option>
-                            <option value="SD" {{ $user->country == 'SD' ? 'selected' : '' }}>السودان</option>
-                            <option value="IQ" {{ $user->country == 'IQ' ? 'selected' : '' }}>العراق</option>
-                            <option value="YE" {{ $user->country == 'YE' ? 'selected' : '' }}>اليمن</option>
+                            @php
+                                $countries = [
+                                    'EG' => 'مصر', 'SA' => 'السعودية', 'AE' => 'الإمارات', 'KW' => 'الكويت',
+                                    'QA' => 'قطر', 'BH' => 'البحرين', 'OM' => 'عُمان', 'JO' => 'الأردن',
+                                    'LB' => 'لبنان', 'MA' => 'المغرب', 'DZ' => 'الجزائر', 'TN' => 'تونس',
+                                    'SD' => 'السودان', 'IQ' => 'العراق', 'YE' => 'اليمن'
+                                ];
+                            @endphp
+
+                            @foreach($countries as $code => $name)
+                                <option value="{{ $code }}" {{ $user->country == $code ? 'selected' : '' }}>
+                                    {{ $name }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -54,13 +67,14 @@
                         <label class="form-label">الهاتف</label>
                         <input type="text" name="phone" value="{{ old('phone', $user->phone) }}" class="form-control" required>
                     </div>
-                    <form action="{{ route('profile.update') }}" method="POST">
-                        @csrf
-                        @method('PUT')
+
                     <button type="submit" class="btn btn-success">حفظ التعديلات</button>
-                    </form>
-                    <a href="" class="btn btn-secondary">رجوع</a>
+
+                    {{-- ✅ زر الرجوع --}}
+                    <a href="{{ route('profile.show') }}" class="btn btn-secondary">رجوع</a>
+
                 </form>
+
             </div>
         </div>
     </div>

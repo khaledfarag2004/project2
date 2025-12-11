@@ -48,18 +48,47 @@
             <div class="card-header bg-secondary text-white">
                 <h5><i class="bi bi-book me-2"></i> الكورسات المرفوعة</h5>
             </div>
+
             <div class="card-body">
                 @if($user->courses->count() > 0)
                     <ul class="list-group list-group-flush">
+
                         @foreach($user->courses as $course)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
+
                                 <div>
                                     <strong>{{ $course->title }}</strong>
-                                    <p class="text-muted mb-0">{{ $course->description }}</p>
+                                    <p class="text-muted mb-0">{{ \Illuminate\Support\Str::limit($course->description, 80) }}</p>
                                 </div>
-                                <span class="badge bg-primary">{{ $course->price }} جنيه</span>
+
+                                <div class="text-end">
+
+                                    <span class="badge bg-primary mb-2">{{ $course->price }} جنيه</span>
+
+                                    <div>
+                                        <!-- ✅ عرض الكورس -->
+                                        <a href="{{ route('client.courses.show', $course) }}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            عرض
+                                        </a>
+
+                                        <!-- ✅ حذف الكورس -->
+                                        <form action="{{ route('client.courses.destroy', $course) }}"
+                                              method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-sm btn-outline-danger"
+                                                    onclick="return confirm('هل أنت متأكد من الحذف؟')">
+                                                حذف
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                </div>
+
                             </li>
                         @endforeach
+
                     </ul>
                 @else
                     <p class="text-muted">هذا المستخدم لم يقم برفع أي كورسات بعد.</p>

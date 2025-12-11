@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Course;
 use App\Models\User;
+use App\Http\Requests\client\CourseRequest;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -15,18 +16,19 @@ class CourseController extends Controller
     {
         return view('client.course.create-course');
     }
-
-    public function createCourse(Request $request)
+    public function create()
     {
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-        ]);
+        return view('client.course.create-course');
+    }
+
+    public function store(CourseRequest $request)
+    {
+        $data = $request->validated();
 
         $user = Auth::user();
         $user->courses()->create($data);
-        return redirect()->route('create.courses')->with('success', 'تم حفظ الكورس بنجاح');
+
+        return redirect()->route('client.courses.create')->with('success', 'تم حفظ الكورس بنجاح');
     }
 
     public function show($id)

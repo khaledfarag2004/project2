@@ -17,10 +17,10 @@
                 <p><strong>Created At: {{ $user->created_at }}</strong></p>
             </div>
             <div class="card-footer text-center">
-                <a href="{{ route('admin.user') }}" class="btn btn-secondary">Back</a>
-                <a href="{{ route('admin.edit', $user->id) }}" class="btn btn-warning">Edit</a>
+                <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Back</a>
+                <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-warning">Edit</a>
 
-                <form action="{{ route('admin.delete', $user->id) }}" method="POST" style="display:inline;">
+                <form action="{{ route('admin.users.delete', $user) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-sm btn-danger"

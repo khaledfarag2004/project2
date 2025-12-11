@@ -4,14 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Http\Requests\Admin\CourseRequest;
+
 use Illuminate\Http\Request;
 
 
 class CourseController extends Controller
 {
-    public function destroy($id)
+    public function destroy(Course $course)
     {
-        $course = Course::findOrFail($id);
         $course->delete();
         return redirect()->back()->with('Success', 'Course Deleted Successfully');
     }
@@ -27,16 +28,12 @@ class CourseController extends Controller
         return view('admin.courses.create');
     }
 
-    public function store(Request $request)
+    public function store(CourseRequest $request)
     {
-        $create = $request->validate([
-            'title' => 'required',
-            'name_instractor' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-        ]);
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
 
-        Course::create($create);
+        Course::create($data);
 
         return redirect()->back()->with('Success', 'Course Created Successfully');
     }

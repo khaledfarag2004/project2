@@ -49,7 +49,7 @@
         <div class="card-header bg-white fw-bold">✏️ Save</div>
         <div class="card-body">
 
-            <form class="row g-3" method="POST" action="{{ route('admin.update', $user->id) }}">
+            <form class="row g-3" method="POST" action="{{ route('admin.users.update', $user) }}">
                 @csrf
                 @method('PUT')
 
@@ -111,7 +111,7 @@
         <div class="card-header bg-white fw-bold">⚙️ الإعدادات</div>
         <div class="card-body">
 
-            <form action="{{ route('admin.delete', $user->id) }}" method="POST" style="display:inline-block;">
+            <form action="{{ route('admin.users.delete', $user) }}" method="POST" style="display:inline-block;">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure?')">Delete</button>

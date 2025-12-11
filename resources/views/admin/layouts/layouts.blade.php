@@ -35,7 +35,7 @@
             color: #3b5bdb;
         }
         .content {
-            margin-right: 250px; /* يسيب مساحة للسايدبار */
+            margin-right: 250px;
             padding: 30px;
         }
     </style>
@@ -48,13 +48,16 @@
         <h5 class="fw-bold">كورساتـity</h5>
     </div>
 
-    <a href="{{ route('admin.home') }}" class="active">🏠 Home</a>
-    <a href="{{ route('admin.user') }}">👤Profile</a>
-    <a href="{{ route('course.index') }}">📚 Courses</a>
-    <a href="#">📝 Enrollments</a>
+    <a href="{{ route('admin.users.home') }}" class="active">🏠 Home</a>
+
+    <a href="{{ route('admin.users.index') }}">👤 Profile</a>
+    <a href="{{ route('admin.courses.index') }}">📚 Courses</a>
+    <a href="{{ route('home') }}">📝 Go To Website.</a>
+
     <a href="#">📜 History</a>
+
     <a href="#">⚙️ Setting</a>
-    <a href="#" class="text-danger">🚪Logout</a>
+
 </aside>
 
 <!-- CONTENT -->

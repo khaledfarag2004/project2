@@ -11,3 +11,4 @@ Route::get('/register', [HomeController::class, 'showRegisterForm'])->name('clie
 Route::post('/register', [HomeController::class, 'register'])->name('client.register.submit');
 
 
+

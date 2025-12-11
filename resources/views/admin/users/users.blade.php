@@ -27,9 +27,9 @@
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->role }}</td>
                         <td>
-                            <a href="{{ route('admin.show', $user->id ) }}" class="btn btn-info btn-sm">Show</a>
-                            <a href="{{ route('admin.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('admin.delete', $user->id) }}" method="POST" style="display:inline-block;">
+                            <a href="{{ route('admin.users.show', $user ) }}" class="btn btn-info btn-sm">Show</a>
+                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('admin.users.delete', $user) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure?')">Delete</button>

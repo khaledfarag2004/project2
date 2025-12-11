@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\client\HomeRequest;
+use App\Http\Requests\client\RegisterRequest;
+use App\Http\Requests\client\UdpateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +17,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::with('user')->get();
         $users = User::all();
         return view('client.home', compact('courses'), compact('users'));
     }
@@ -25,12 +28,9 @@ class HomeController extends Controller
     }
 
 
-    public function login(Request $request)
+    public function login(HomeRequest $request)
     {
-        $data = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+        $data = $request->validated();
 
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
@@ -47,15 +47,8 @@ class HomeController extends Controller
     {
       return view('client.register.register');
     }
-    public function register(Request $request){
-        $data = $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users',
-            'phone'    => 'required|string|max:20',
-            'role'     => 'required|string',
-            'country'  => 'required|string',
-            'password' => 'required|min:6'
-        ]);
+    public function register(RegisterRequest $request){
+        $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
         $user=User::query()->create($data);
         auth()->login($user);
@@ -88,15 +81,10 @@ class HomeController extends Controller
         return view('client.showprofile.edit', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(UdpateRequest $request)
     {
         $user = Auth::user();
-        $data = $request->validate([
-            'name'     => 'required|string|max:255',
-            'phone'    => 'required|string|max:20',
-            'role'     => 'required|string',
-            'country'  => 'required|string',
-        ]);
+        $data = $request->validated();
         $user->update($data);
         return redirect()->route('home')->with('success','DONE.');
 
