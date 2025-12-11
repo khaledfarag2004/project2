@@ -31,16 +31,14 @@ class CourseController extends Controller
         return redirect()->route('client.courses.create')->with('success', 'تم حفظ الكورس بنجاح');
     }
 
-    public function show($id)
+    public function show()
     {
-        $user = User::findOrFail($id);
         return view('client.Show.show', compact('user'));
 
     }
 
-    public function destroy($id)
+    public function destroy()
     {
-        $course = Course::findOrFail($id);
         if ($course->user_id == auth()->id()) {
             $course->delete();
             return back()->with('success', 'Done');
