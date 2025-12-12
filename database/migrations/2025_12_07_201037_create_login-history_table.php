@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->ipAddress('ip_address');
-            $table->timestamps('login_at');
+            $table->timestamp('login_at');
         });
     }
 
