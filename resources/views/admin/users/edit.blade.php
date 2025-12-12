@@ -83,6 +83,15 @@
                     </div>
                     <!-- ✅ END ROLE FIELD -->
 
+                    <div class="col-md-6">
+                        <label class="form-label">Verified</label>
+                        <select name="is_verified" class="form-control">
+                            <option value="1" {{ old('is_verified', $user->is_verified) == 1 ? 'selected' : '' }}>موثق</option>
+                            <option value="0" {{ old('is_verified', $user->is_verified) == 0 ? 'selected' : '' }}>غير موثق</option>
+                        </select>
+                    </div>
+
+
                     <button type="submit" class="btn btn-sm btn-primary">Save</button>
                 </form>
             </div>

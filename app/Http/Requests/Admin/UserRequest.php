@@ -23,6 +23,7 @@ class UserRequest extends FormRequest
     {
         return [
             'email' => 'required|email' ,
+            'is_verified' => 'required|boolean' ,
             'name' => 'required|string|max:255',
             'phone' => 'nullable|string|max:20',
             'role' => 'nullable',

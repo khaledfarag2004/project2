@@ -13,7 +13,12 @@
                      class="rounded-circle border border-4 border-white shadow"
                      alt="User Avatar" width="150" height="150">
 
-                <h3 class="mt-3 mb-1">{{ $user->name }}</h3>
+                <h3 class="mt-3 mb-1">
+                    {{ $user->name }}
+                    @if($user->is_verified)
+                        <i class="bi bi-patch-check-fill text-primary" title="حساب موثق"></i>
+                    @endif
+                </h3>
                 <p class="text-muted mb-3">
                     <i class="bi bi-envelope me-1"></i> {{ $user->email }}
                 </p>
