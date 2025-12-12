@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\client\HomeRequest;
-use App\Http\Requests\client\RegisterRequest;
-use App\Http\Requests\client\UdpateRequest;
+use App\Http\Requests\Client\HomeRequest;
+use App\Http\Requests\Client\RegisterRequest;
+use App\Http\Requests\Client\UdpateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
