@@ -16,10 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
 
             Route::middleware('web')
                 ->group(base_path('routes/auth.php'));
-//
-//            Route::middleware('')
-//                ->group(base_path('routes/admin.php'));
 
+            Route::middleware('api')
+                ->prefix('api')
+                ->group(base_path('routes/api.php'));
 
         },
         commands: __DIR__.'/../routes/console.php',
