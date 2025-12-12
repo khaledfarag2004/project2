@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\CourseRequest;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,12 +18,9 @@ class ClientCourseApiController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(CourseRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|string',
-            'description' => 'nullable|string'
-        ]);
+        $data = $request->validated();
 
         $course = Auth::user()->courses()->create($data);
 

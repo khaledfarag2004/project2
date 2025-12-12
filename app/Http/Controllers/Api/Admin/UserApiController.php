@@ -58,10 +58,10 @@ class UserApiController extends Controller
         }
 
         $data = $request->validate([
-            'name'     => 'sometimes|string',
-            'email'    => 'sometimes|email|unique:users,email,' . $id,
+            'name' => 'sometimes|string',
+            'email' => 'sometimes|email|unique:users,email,' . $id,
             'password' => 'sometimes|string|min:6',
-            'role'     => 'nullable|string'
+            'role' => 'nullable|string'
         ]);
 
         if (isset($data['password'])) {
